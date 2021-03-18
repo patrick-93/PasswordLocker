@@ -1,0 +1,47 @@
+/* body {
+    background-color: #edfffd;
+} */
+ header h1 {
+    text-align: center;
+}
+header {
+    width: 100%;
+}
+
+.img-centered {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.main-container {
+    background-color: #ffffff;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.h1-centered {
+    text-align: center;
+}
+
+.row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.learn-more-list {
+    text-align: center;
+    list-style: inside;
+}
+
+.faq-item {
+    padding-bottom: 16px;
+}
+
+footer {
+    padding-top: 40px;
+}
+
+.icon {
+    max-height: 50px;
+}
