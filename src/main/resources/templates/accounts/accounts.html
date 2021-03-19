@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/custom.css" rel="stylesheet" />
+    <script src="/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <title>Password Locker - Accounts</title>
+</head>
+<body>
+    <div class="container main-container">
+        <div th:replace="fragments/navbar :: nav"></div>
+        <p>Accounts page</p>
+        <div class="row">
+            <div class="col-md-4 col-sm-6" th:each="account : ${accounts}">
+                <h3 th:text="${account.username}"></h3>
+                <p th:text="${account.description}"></p>
+            </div>
+        </div>
+        <footer>
+
+        </footer>
+    </div> <!-- End of main container -->
+
+</body>
+</html>

@@ -20,7 +20,26 @@ public class Account {
     private long createdBy;
     private Timestamp lastUpdate;
     private long lastUpdatedBy;
-
+/*
+    public Account(
+            String username,
+            String password,
+            String description,
+            String type,
+            Timestamp createdOn,
+            long createdBy,
+            Timestamp lastUpdate,
+            long lastUpdatedBy) {
+        this.username = username;
+        this.password = password;
+        this.description = description;
+        this.type = type;
+        this.createdOn = createdOn;
+        this.createdBy = createdBy;
+        this.lastUpdate = lastUpdate;
+        this.lastUpdatedBy = lastUpdatedBy;
+    }
+*/
     protected Account() {}
 
     @Override
