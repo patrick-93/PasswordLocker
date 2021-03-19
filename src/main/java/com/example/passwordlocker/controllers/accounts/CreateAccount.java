@@ -17,9 +17,11 @@ public class CreateAccount {
 
     @GetMapping(value={"/", ""})
     public String createIndex() {
-        return "create-account";
+        return "accounts/create-account";
     }
 
-    // @PostMapping(value={"/", ""})
-
+    @PostMapping(value={"/", ""})
+    public String createAccount() {
+        return "index";
+    }
 }
