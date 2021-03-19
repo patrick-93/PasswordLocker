@@ -1,6 +1,8 @@
-/* body {
-    background-color: #edfffd;
-} */
+body {
+    background-color: #343a40;
+    color: #c9c9c9;
+
+}
  header h1 {
     text-align: center;
 }
@@ -15,13 +17,13 @@ header {
 }
 
 .main-container {
-    background-color: #ffffff;
     padding-left: 0;
     padding-right: 0;
 }
 
-.h1-centered {
+.h1-page-header {
     text-align: center;
+    padding-bottom: 20px;
 }
 
 .row {
@@ -29,19 +31,18 @@ header {
     margin-right: 0px;
 }
 
-.learn-more-list {
-    text-align: center;
-    list-style: inside;
+.horizontal-button-list {
+    list-style: none;
 }
 
-.faq-item {
-    padding-bottom: 16px;
+.dropdown-background-edit {
+    background-color: #d6be7a;
 }
 
-footer {
-    padding-top: 40px;
+.dropdown-background-delete {
+    background-color: #ba836e;
 }
 
-.icon {
-    max-height: 50px;
+.dropdown-menu {
+    background-color: #343a40!important;
 }
