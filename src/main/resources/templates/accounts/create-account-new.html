@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/custom.css" rel="stylesheet" />
+    <script src="/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <title>Password Locker - Accounts</title>
+</head>
+<body>
+<div class="container main-container">
+    <div th:replace="fragments/navbar :: nav"></div>
+    <h1 class="h1-page-header">Create Account</h1>
+    <!--    <div class="row" >-->
+    <form th:action="@{/accounts/create}" th:object="${account}" action="#" method="post">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input th:field="*{username}" type="text" class="form-control" id="username" placeholder="Username"/>
+            <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" id="usernameHelp" class="form-text text-danger">Invalid</small>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input th:field="*{password}" type="password" class="form-control" id="password" placeholder="Password">
+            <small th:if="${#fields.hasErrors('password')" th:errors="*{password}" id="passwordHelp" class="form-text text-danger">Invalid</small>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input th:field="*{description}" type="text" class="form-control" id="description" placeholder="Description (Max 255 chars)">
+            <small th:if="${#fields.hasErrors('description')" th:errors="*{description}" id="descriptionHelp" class="form-text text-danger">Invalid</small>
+        </div>
+        <div class="form-group">
+            <label for="type">Type</label>
+            <input th:field="*{type}" type="text" class="form-control" id="type" placeholder="Type (Ex: Backup OS account, application default admin account)">
+            <small th:if="${#fields.hasErrors('type')" th:errors="*{type}" id="typeHelp" class="form-text text-danger">Invalid</small>
+        </div>
+        <h2>Temp fields</h2>
+        <!--
+        <div class="form-group">
+            <label for="createdOn">Created On</label>
+            <input th:field="*{createdOn}" type="text" class="form-control" id="createdOn" placeholder="Created On">
+            <small th:if="${#fields.hasErrors('createdOn')" th:errors="*{createdOn}" id="createdOnHelp" class="form-text text-danger">Invalid</small>
+        </div>
+        -->
+        <div class="form-group">
+            <label for="createdBy">Created By</label>
+            <input th:field="*{createdBy}" type="number" class="form-control" id="createdBy" placeholder="Created By">
+            <small th:if="${#fields.hasErrors('createdBy')" th:errors="*{createdBy}" id="createdByHelp" class="form-text text-danger">Invalid</small>
+        </div>
+        <!--
+        <div class="form-group">
+            <label for="lastUpdate">Last update</label>
+            <input th:field="*{lastUpdate}" type="number" class="form-control" id="lastUpdate" placeholder="Last update">
+            <small th:if="${#fields.hasErrors('lastUpdate')" th:errors="*{lastUpdate}" id="lastUpdateHelp" class="form-text text-danger">Invalid</small>
+        </div>
+        -->
+        <div class="form-group">
+            <label for="lastUpdatedBy">Last Update By</label>
+            <input th:field="*{lastUpdatedBy}" type="number" class="form-control" id="lastUpdatedBy" placeholder="Last updated by">
+            <small th:if="${#fields.hasErrors('lastUpdate')" th:errors="*{lastUpdatedBy}" id="lastUpdatedByHelp" class="form-text text-danger">Invalid</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <!--    </div>-->
+    <footer>
+
+    </footer>
+</div> <!-- End of main container -->
+
+</body>
+</html>

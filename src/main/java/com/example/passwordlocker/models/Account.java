@@ -1,5 +1,8 @@
 package com.example.passwordlocker.models;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,8 +19,10 @@ public class Account {
     private String password;
     private String description;
     private String type;
+    @CreationTimestamp
     private Timestamp createdOn;
     private long createdBy;
+    @UpdateTimestamp
     private Timestamp lastUpdate;
     private long lastUpdatedBy;
 /*
@@ -40,7 +45,7 @@ public class Account {
         this.lastUpdatedBy = lastUpdatedBy;
     }
 */
-    protected Account() {}
+    //protected Account() {}
 
     @Override
     public String toString() {
