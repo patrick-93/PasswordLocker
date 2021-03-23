@@ -20,14 +20,14 @@ public class CreateAccount {
     @GetMapping(value={"/", ""})
     public String createAccountGet(Model model) {
         model.addAttribute("account", new Account());
-        return "accounts/create-account-new";
+        return "accounts/create-account";
     }
 
     @PostMapping(value={"/", ""})
     public String createAccountPost(@ModelAttribute("account") Account account, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return "accounts/create-account";
+            return "/";
         }
         repository.save(account);
         return "redirect:/";
