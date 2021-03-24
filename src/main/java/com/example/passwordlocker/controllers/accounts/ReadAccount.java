@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.Timestamp;
@@ -19,13 +21,6 @@ public class ReadAccount {
     @Autowired
     private AccountRepository repository;
 
-    /*
-    @GetMapping(value={"/", ""})
-    public String showAll(Model model) {
-        model.addAttribute("accounts", repository.findAll());
-        return "accounts/accounts";
-    }
-     */
     @GetMapping(value={"/", ""})
     public ModelAndView showAll() {
         ModelAndView mav = new ModelAndView("accounts/accounts");
@@ -33,5 +28,12 @@ public class ReadAccount {
         return mav;
     }
 
+    @GetMapping("/{id}")
+    public ModelAndView accountDetail(@PathVariable("id") long id) {
+        ModelAndView mav = new ModelAndView("accounts/account-details");
+        mav.addObject("account", repository.findById(id));
+        return mav;
+    }
 
 }
+
