@@ -13,8 +13,7 @@
 <body>
 <div class="container main-container">
     <div th:replace="fragments/navbar :: nav"></div>
-<!--    <h1 class="h1-page-header">Accounts</h1>-->
-<!--    <div class="row">-->
+    <div class="account-detail">
         <h2 th:text="${account.username}"></h2>
         <hr>
         <h4>Type</h4>
@@ -34,8 +33,23 @@
         <hr>
         <h4>Created On</h4>
         <p th:text="${account.createdOn}"></p>
-<!--        <a th:href="@{/accounts/id=(${account.id})}" th:text="Details" class="btn btn-primary" role="button"></a>-->
-<!--    </div>-->
+        <div class="row">
+            <div class="col-sm-6">
+                <a th:href="@{/accounts/edit(id=${account.id})}"
+                   th:text="Edit"
+                   class="btn btn-warning"
+                   role="button">
+                </a>
+            </div>
+            <div class="col-sm-6">
+                <a th:href="@{/accounts/delete(id=${account.id})}"
+                   th:text="Delete"
+                   class="btn btn-danger"
+                   role="button">
+                </a>
+            </div>
+        </div>
+    </div>
     <footer>
 
     </footer>

@@ -20,6 +20,7 @@ public class CreateAccount {
     @GetMapping(value={"/", ""})
     public String createAccountGet(Model model) {
         model.addAttribute("account", new Account());
+        model.addAttribute("pageTitle", "Create Account");
         return "accounts/create-account";
     }
 
@@ -30,7 +31,7 @@ public class CreateAccount {
             return "/";
         }
         repository.save(account);
-        return "redirect:/";
+        return "redirect:/accounts";
     }
 
 }

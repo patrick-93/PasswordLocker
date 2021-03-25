@@ -54,3 +54,13 @@ header {
 hr {
     border-top: 1px solid rgba();
 }
+
+.account-detail {
+    margin: auto;
+    text-align: center;
+}
+
+.account-card {
+    padding: 15px;
+
+}
