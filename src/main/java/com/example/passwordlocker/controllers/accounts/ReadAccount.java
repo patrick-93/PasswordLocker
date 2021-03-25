@@ -21,18 +21,18 @@ public class ReadAccount {
     @Autowired
     private AccountRepository repository;
 
-    @GetMapping(value={"/", ""})
+    @GetMapping(value="")
     public ModelAndView showAll() {
         ModelAndView mav = new ModelAndView("accounts/accounts");
         mav.addObject("accounts", repository.findAll());
         return mav;
     }
 
-    @GetMapping("/{id}")
-    public ModelAndView accountDetail(@PathVariable("id") long id) {
-        ModelAndView mav = new ModelAndView("accounts/account-details");
-        mav.addObject("account", repository.findById(id));
-        return mav;
+    @GetMapping("/details")
+    public String accountDetail(@RequestParam(name = "id", required = true) long id, Model model) {
+        Account account = repository.findById(id).orElse(new Account());
+        model.addAttribute("account", account);
+        return "accounts/account-details";
     }
 
 }

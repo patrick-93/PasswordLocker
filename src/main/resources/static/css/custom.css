@@ -50,3 +50,7 @@ header {
 .table {
     color: #c9c9c9;
 }
+
+hr {
+    border-top: 1px solid rgba();
+}
