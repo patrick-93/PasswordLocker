@@ -22,9 +22,7 @@ public class UpdateAccount {
         Account account = repository.findById(id).orElse(new Account());
         model.addAttribute("account", account);
         model.addAttribute("pageTitle", "Edit Account");
-//        Account emptyAccount = new Account();
-//        model.addAttribute("account", emptyAccount);
-        return "accounts/create-account";
+        return "accounts/edit-account";
     }
 
     @PostMapping(value="/accounts/edit")
@@ -32,6 +30,7 @@ public class UpdateAccount {
         if (bindingResult.hasErrors()) {
             return "/";
         }
+        System.out.println("\n\n\nNew Account: " + account.toString());
         repository.save(account);
         return "redirect:/accounts";
     }

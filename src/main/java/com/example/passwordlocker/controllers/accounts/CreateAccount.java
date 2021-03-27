@@ -30,6 +30,7 @@ public class CreateAccount {
         if (bindingResult.hasErrors()) {
             return "/";
         }
+        System.out.println("New Account from create account form: " + account.toString());
         repository.save(account);
         return "redirect:/accounts";
     }

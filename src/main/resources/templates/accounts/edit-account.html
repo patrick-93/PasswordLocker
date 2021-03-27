@@ -13,8 +13,14 @@
 <body>
 <div class="container main-container">
     <div th:replace="fragments/navbar :: nav"></div>
-    <h1 class="h1-page-header">Edit Account</h1>
-    <form th:action="@{/accounts/create}" th:object="${account}" action="#" method="post">
+    <h1 class="h1-page-header" th:text="${pageTitle}">Create Account</h1>
+    <!--    <div class="row" >-->
+    <form th:action="@{/accounts/edit}" th:object="${account}" action="#" method="post">
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input th:field="*{id}" type="number" class="form-control" id="id" placeholder="Username" readonly/>
+            <small th:if="${#fields.hasErrors('id')}" th:errors="*{id}" id="idHelp" class="form-text text-danger">Invalid</small>
+        </div>
         <div class="form-group">
             <label for="username">Username</label>
             <input th:field="*{username}" type="text" class="form-control" id="username" placeholder="Username"/>
@@ -36,15 +42,29 @@
             <small th:if="${#fields.hasErrors('type')}" th:errors="*{type}" id="typeHelp" class="form-text text-danger">Invalid</small>
         </div>
         <h2>Temp fields</h2>
+
         <div class="form-group">
             <label for="createdBy">Created By</label>
             <input th:field="*{createdBy}" type="number" class="form-control" id="createdBy" placeholder="Created By">
             <small th:if="${#fields.hasErrors('createdBy')}" th:errors="*{createdBy}" id="createdByHelp" class="form-text text-danger">Invalid</small>
         </div>
+
         <div class="form-group">
-            <label for="lastUpdatedBy">Last Update By</label>
+            <label for="createdOn">Created On</label>
+            <input th:field="*{createdOn}" type="datetime-local" class="form-control" id="createdOn" placeholder="Created On" readonly>
+            <small th:if="${#fields.hasErrors('createdOn')}" th:errors="*{createdOn}" id="createdOnHelp" class="form-text text-danger">Invalid</small>
+        </div>
+
+        <div class="form-group">
+            <label for="lastUpdatedBy">Last Updated By</label>
             <input th:field="*{lastUpdatedBy}" type="number" class="form-control" id="lastUpdatedBy" placeholder="Last updated by">
-            <small th:if="${#fields.hasErrors('lastUpdate')}" th:errors="*{lastUpdatedBy}" id="lastUpdatedByHelp" class="form-text text-danger">Invalid</small>
+            <small th:if="${#fields.hasErrors('lastUpdatedBy')}" th:errors="*{lastUpdatedBy}" id="lastUpdatedByHelp" class="form-text text-danger">Invalid</small>
+        </div>
+
+        <div class="form-group">
+            <label for="lastUpdate">Last Update</label>
+            <input th:field="*{lastUpdate}" type="datetime-local" class="form-control" id="lastUpdate" placeholder="Last updated by" readonly>
+            <small th:if="${#fields.hasErrors('lastUpdate')}" th:errors="*{lastUpdate}" id="lastUpdateHelp" class="form-text text-danger">Invalid</small>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

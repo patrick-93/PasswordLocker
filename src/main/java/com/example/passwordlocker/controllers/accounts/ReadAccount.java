@@ -31,6 +31,7 @@ public class ReadAccount {
     @GetMapping("/details")
     public String accountDetail(@RequestParam(name = "id", required = true) long id, Model model) {
         Account account = repository.findById(id).orElse(new Account());
+        System.out.println("\n\n\nAccount found by ID: " + account.toString());
         model.addAttribute("account", account);
         return "accounts/account-details";
     }
