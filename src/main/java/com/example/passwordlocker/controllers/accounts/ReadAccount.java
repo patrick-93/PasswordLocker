@@ -43,13 +43,28 @@ public class ReadAccount {
 
         // Check if we have an actual account object, if not show an error page
         if (account.getUsername() != null) {
+            model.addAttribute("account", account);
+            return "accounts/account-details";
+        } else {
+            String error = "Unable to find an account with that ID";
+            model.addAttribute("error", error);
+            return "errors/account-error";
+        }
+    }
+
+    @GetMapping("/showPassword")
+    public String detailWithPassword(@RequestParam(name = "id") long id, Model model) {
+        Account account = repository.findById(id).orElse(new Account());
+
+        // Check if we have an actual account object, if not show an error page
+        if (account.getUsername() != null) {
             // Decrypt the password so it displays
             String encryptedPassword = account.getPassword();
             String decryptedPassword = PasswordConfig.decryptString(key, salt, encryptedPassword);
             account.setPassword(decryptedPassword);
 
             model.addAttribute("account", account);
-            return "accounts/account-details";
+            return "accounts/account-details-password";
         } else {
             String error = "Unable to find an account with that ID";
             model.addAttribute("error", error);
