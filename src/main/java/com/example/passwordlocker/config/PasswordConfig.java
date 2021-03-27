@@ -15,9 +15,6 @@ import java.util.Base64;
 public class PasswordConfig {
 
     public static String encryptString(String key, String salt, String password) {
-        System.out.println("Received password: " + password);
-        System.out.println("Using secret-key " + key);
-        System.out.println("Using salt " + salt);
         try {
             byte[] iv = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
             IvParameterSpec ivSpec = new IvParameterSpec(iv);
