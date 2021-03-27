@@ -35,14 +35,6 @@ header {
     list-style: none;
 }
 
-.dropdown-background-edit {
-    background-color: #d6be7a;
-}
-
-.dropdown-background-delete {
-    background-color: #ba836e;
-}
-
 .dropdown-menu {
     background-color: #343a40!important;
 }
@@ -52,12 +44,16 @@ header {
 }
 
 hr {
-    border-top: 1px solid rgba();
+    border-top: 1px solid #c9c9c9;
 }
 
 .account-detail {
     margin: auto;
     text-align: center;
+}
+
+.account-detail-block {
+    padding-bottom: 20px;
 }
 
 .account-card {

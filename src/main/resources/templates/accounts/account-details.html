@@ -9,29 +9,26 @@
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <title>Password Locker - Accounts</title>
-    <script>
-        function revealPassword() {
-            var pw = document.getElementById("hiddenPassword");
-            /*
-            pw.style.display === "block";
-            if (pw.style.display === "none") {
-                pw.style.display === "block"
-            } else {
-                pw.style.display = "none";
-            }
-            */
-        }
-    </script>
 </head>
 <body>
 <div class="container main-container">
     <div th:replace="fragments/navbar :: nav"></div>
     <div class="account-detail">
         <h2 th:text="${account.username}"></h2>
+        <a th:href="@{/accounts/edit(id=${account.id})}"
+           th:text="Edit"
+           class="btn btn-warning"
+           role="button">
+        </a>
+        <a th:href="@{/accounts/delete(id=${account.id})}"
+           th:text="Delete"
+           class="btn btn-danger"
+           role="button">
+        </a>
         <hr>
+        <!--
         <h4>Password</h4>
         <p th:text="${account.password}" id="hiddenPassword"></p>
-        <button class="btn btn-warning" onclick="revealPassword()">Show</button>
         <hr>
         <h4>Type</h4>
         <p th:text="${account.type}"></p>
@@ -50,20 +47,36 @@
         <hr>
         <h4>Created On</h4>
         <p th:text="${account.createdOn}"></p>
+        </div>
+        -->
         <div class="row">
-            <div class="col-sm-6">
-                <a th:href="@{/accounts/edit(id=${account.id})}"
-                   th:text="Edit"
-                   class="btn btn-warning"
-                   role="button">
-                </a>
+            <div class="col-md-3 col-sm-3 account-detail-block">
+                <h4>Password</h4>
+                <p th:text="${account.password}" id="hiddenPassword"></p>
             </div>
-            <div class="col-sm-6">
-                <a th:href="@{/accounts/delete(id=${account.id})}"
-                   th:text="Delete"
-                   class="btn btn-danger"
-                   role="button">
-                </a>
+            <div class="col-md-3 col-sm-3 account-detail-block">
+                <h4>Type</h4>
+                <p th:text="${account.type}"></p>
+            </div>
+            <div class="col-md-3 col-sm-3 account-detail-block">
+                <h4>Description</h4>
+                <p th:text="${account.description}"></p>
+            </div>
+            <div class="col-md-3 col-sm-3 account-detail-block">
+                <h4>Created By</h4>
+                <p th:text="${account.createdBy}"></p>
+            </div>
+            <div class="col-md-3 col-sm-3 account-detail-block">
+                <h4>Created On</h4>
+                <p th:text="${account.createdOn}"></p>
+            </div>
+            <div class="col-md-3 col-sm-3 account-detail-block">
+                <h4>Last Update</h4>
+                <p th:text="${account.lastUpdate}"></p>
+            </div>
+            <div class="col-md-3 col-sm-3 account-detail-block">
+                <h4>Last Updated By</h4>
+                <p th:text="${account.lastUpdatedBy}"></p>
             </div>
         </div>
     </div>

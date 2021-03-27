@@ -30,7 +30,6 @@ public class UpdateAccount {
         if (bindingResult.hasErrors()) {
             return "/";
         }
-        System.out.println("\n\n\nNew Account: " + account.toString());
         repository.save(account);
         return "redirect:/accounts";
     }
