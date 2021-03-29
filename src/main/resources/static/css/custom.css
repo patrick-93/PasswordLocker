@@ -58,5 +58,14 @@ hr {
 
 .account-card {
     padding: 15px;
+}
 
+.login-header {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+.text-centered {
+    text-align: center;
 }

@@ -15,6 +15,15 @@
             <li class="nav-item">
                 <a class="nav-link" href="/accounts/create">Create Account</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+                <form th:action="@{/logout}" th:hidden="true" name="logoutForm" method="post">
+                    <input type="submit" value="logout">
+                </form>
+                <a class="nav-link" href="javascript: document.logoutForm.submit()">Logout</a>
+            </li>
 
             <!-- // Sample dropdown
             <li class="nav-item dropdown">
