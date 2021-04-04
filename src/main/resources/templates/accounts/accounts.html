@@ -21,7 +21,7 @@
             <p th:text="'Description: ' + ${account.description}"></p>
             <p th:text="'Last Update: ' + ${account.lastUpdate}"></p>
             <p th:text="'Last Updated By: ' + ${account.lastUpdatedBy}"></p>
-            <a th:href="@{/accounts/details(id=${account.id})}"
+            <a th:href="@{/accounts/details(id=${account.accountId})}"
                th:text="Details"
                class="btn btn-primary"
                role="button">

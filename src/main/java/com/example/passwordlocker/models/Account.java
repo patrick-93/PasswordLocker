@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private long accountId;
 
     private String username;
     private String password;
@@ -50,7 +50,7 @@ public class Account {
     @Override
     public String toString() {
         return "Account{" +
-                "id=" + id +
+                "id=" + accountId +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", description='" + description + '\'' +
@@ -62,12 +62,12 @@ public class Account {
                 '}';
     }
 
-    public long getId() {
-        return id;
+    public long getAccountId() {
+        return accountId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setAccountId(long accountId) {
+        this.accountId = accountId;
     }
 
     public String getUsername() {

@@ -17,9 +17,9 @@
     <!--    <div class="row" >-->
     <form th:action="@{/accounts/edit}" th:object="${account}" action="#" method="post">
         <div class="form-group">
-            <label for="id">ID</label>
-            <input th:field="*{id}" type="number" class="form-control" id="id" placeholder="Username" readonly/>
-            <small th:if="${#fields.hasErrors('id')}" th:errors="*{id}" id="idHelp" class="form-text text-danger">Invalid</small>
+            <label for="accountId">ID</label>
+            <input th:field="*{accountId}" type="number" class="form-control" id="accountId" placeholder="ID" readonly/>
+            <small th:if="${#fields.hasErrors('accountId')}" th:errors="*{accountId}" id="accountIdHelp" class="form-text text-danger">Invalid</small>
         </div>
         <div class="form-group">
             <label for="username">Username</label>
