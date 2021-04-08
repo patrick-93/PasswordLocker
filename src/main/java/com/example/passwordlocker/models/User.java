@@ -20,7 +20,7 @@ public class User {
     private Timestamp lastUpdate;
     private long lastUpdatedBy;
 
-    protected User() {}
+    //protected User() {}
 
     @Override
     public String toString() {
