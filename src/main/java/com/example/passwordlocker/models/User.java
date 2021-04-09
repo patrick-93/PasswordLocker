@@ -2,6 +2,8 @@ package com.example.passwordlocker.models;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -19,8 +21,6 @@ public class User {
     private long createdBy;
     private Timestamp lastUpdate;
     private long lastUpdatedBy;
-
-    //protected User() {}
 
     @Override
     public String toString() {

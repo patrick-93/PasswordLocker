@@ -3,6 +3,7 @@ package com.example.passwordlocker.controllers;
 import com.example.passwordlocker.models.User;
 import com.example.passwordlocker.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +18,9 @@ public class IndexController {
 
     @Autowired
     private UserRepository repository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping(value={"/", "/index"})
     private String index() {
@@ -41,6 +45,8 @@ public class IndexController {
             return "redirect:/";
         }
         // admin doesn't exist so create from post data
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setUsername("admin");
         user.setRole("USER");
         user.setEnabled(true);
         repository.save(user);

@@ -3,11 +3,9 @@ package com.example.passwordlocker.models;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Set;
 
 @Entity
 public class Account {
@@ -25,27 +23,7 @@ public class Account {
     @UpdateTimestamp
     private Timestamp lastUpdate;
     private long lastUpdatedBy;
-/*
-    public Account(
-            String username,
-            String password,
-            String description,
-            String type,
-            Timestamp createdOn,
-            long createdBy,
-            Timestamp lastUpdate,
-            long lastUpdatedBy) {
-        this.username = username;
-        this.password = password;
-        this.description = description;
-        this.type = type;
-        this.createdOn = createdOn;
-        this.createdBy = createdBy;
-        this.lastUpdate = lastUpdate;
-        this.lastUpdatedBy = lastUpdatedBy;
-    }
-*/
-    //protected Account() {}
+
 
     @Override
     public String toString() {
