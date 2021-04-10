@@ -8,6 +8,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class AppUserDetailsService implements UserDetailsService {
     @Autowired
@@ -15,12 +17,10 @@ public class AppUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = repository.getUserByUsername(username);
-        System.out.println("\n\nFound a user with username: " + username + "\n\n");
-        System.out.println("User's bcrypt encoded password is " + user.getPassword() + "\n\n");
-        if (user == null) {
-            throw new UsernameNotFoundException("Unable to find user with username " + username);
-        }
-        return new UserDetailsConfig(user);
+        Optional<User> user = Optional.ofNullable(repository.getUserByUsername(username));
+
+        user.orElseThrow(() -> new UsernameNotFoundException(username + " was not found"));
+
+        return user.map(UserDetailsConfig::new).get();
     }
 }

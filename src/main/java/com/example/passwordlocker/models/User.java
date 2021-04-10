@@ -2,8 +2,6 @@ package com.example.passwordlocker.models;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 public class User {
@@ -15,8 +13,8 @@ public class User {
     private String firstName;
     private String lastName;
     private String password;
-    private String role;
-    private Boolean enabled;
+    private String roles;
+    private Boolean active;
     private Timestamp createdOn;
     private long createdBy;
     private Timestamp lastUpdate;
@@ -30,8 +28,8 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", password='" + password + '\'' +
-                ", role='" + role + '\'' +
-                ", enabled=" + enabled +
+                ", role='" + roles + '\'' +
+                ", enabled=" + active +
                 ", createdOn=" + createdOn +
                 ", createdBy=" + createdBy +
                 ", lastUpdate=" + lastUpdate +
@@ -79,20 +77,20 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
+    public String getRoles() {
+        return roles;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
 
-    public Boolean getEnabled() {
-        return enabled;
+    public Boolean getActive() {
+        return active;
     }
 
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public Timestamp getCreatedOn() {
