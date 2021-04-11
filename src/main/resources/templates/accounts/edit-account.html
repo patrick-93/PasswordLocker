@@ -21,49 +21,66 @@
             <input th:field="*{accountId}" type="number" class="form-control" id="accountId" placeholder="ID" readonly/>
             <small th:if="${#fields.hasErrors('accountId')}" th:errors="*{accountId}" id="accountIdHelp" class="form-text text-danger">Invalid</small>
         </div>
+
         <div class="form-group">
             <label for="username">Username</label>
             <input th:field="*{username}" type="text" class="form-control" id="username" placeholder="Username"/>
             <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" id="usernameHelp" class="form-text text-danger">Invalid</small>
         </div>
+
         <div class="form-group">
             <label for="password">Password</label>
             <input th:field="*{password}" type="password" class="form-control" id="password" placeholder="Password">
             <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" id="passwordHelp" class="form-text text-danger">Invalid</small>
         </div>
+
         <div class="form-group">
             <label for="description">Description</label>
             <input th:field="*{description}" type="text" class="form-control" id="description" placeholder="Description (Max 255 chars)">
             <small th:if="${#fields.hasErrors('description')}" th:errors="*{description}" id="descriptionHelp" class="form-text text-danger">Invalid</small>
         </div>
+
         <div class="form-group">
             <label for="type">Type</label>
             <input th:field="*{type}" type="text" class="form-control" id="type" placeholder="Type (Ex: Backup OS account, application default admin account)">
             <small th:if="${#fields.hasErrors('type')}" th:errors="*{type}" id="typeHelp" class="form-text text-danger">Invalid</small>
         </div>
-<!--        <div class="form-group">-->
-<!--            <label for="createdBy">Created By</label>-->
-<!--            <input th:field="*{createdBy}" type="number" class="form-control" id="createdBy" placeholder="Created By" readonly>-->
-<!--            <small th:if="${#fields.hasErrors('createdBy')}" th:errors="*{createdBy}" id="createdByHelp" class="form-text text-danger">Invalid</small>-->
-<!--        </div>-->
 
-<!--        <div class="form-group">-->
-<!--            <label for="createdOn">Created On</label>-->
-<!--            <input th:field="*{createdOn}" type="datetime-local" class="form-control" id="createdOn" placeholder="Created On" readonly>-->
-<!--            <small th:if="${#fields.hasErrors('createdOn')}" th:errors="*{createdOn}" id="createdOnHelp" class="form-text text-danger">Invalid</small>-->
-<!--        </div>-->
+        <div class="form-group form-group-hidden">
+            <label for="createdById">Created By ID</label>
+            <input th:field="*{createdById}" type="number" class="form-control" id="createdById" placeholder="Created By ID" readonly>
+            <small th:if="${#fields.hasErrors('createdById')}" th:errors="*{createdById}" id="createdByIdHelp" class="form-text text-danger">Invalid</small>
+        </div>
 
-<!--        <div class="form-group">-->
-<!--            <label for="lastUpdatedBy">Last Updated By</label>-->
-<!--            <input th:field="*{lastUpdatedBy}" type="number" class="form-control" id="lastUpdatedBy" placeholder="Last updated by" readonly>-->
-<!--            <small th:if="${#fields.hasErrors('lastUpdatedBy')}" th:errors="*{lastUpdatedBy}" id="lastUpdatedByHelp" class="form-text text-danger">Invalid</small>-->
-<!--        </div>-->
+        <div class="form-group form-group-hidden">
+            <label for="createdBy">Created By</label>
+            <input th:field="*{createdBy}" type="text" class="form-control" id="createdBy" placeholder="Created By" readonly>
+            <small th:if="${#fields.hasErrors('createdBy')}" th:errors="*{createdBy}" id="createdByHelp" class="form-text text-danger">Invalid</small>
+        </div>
 
-<!--        <div class="form-group">-->
-<!--            <label for="lastUpdate">Last Update</label>-->
-<!--            <input th:field="*{lastUpdate}" type="datetime-local" class="form-control" id="lastUpdate" placeholder="Last updated by" readonly>-->
-<!--            <small th:if="${#fields.hasErrors('lastUpdate')}" th:errors="*{lastUpdate}" id="lastUpdateHelp" class="form-text text-danger">Invalid</small>-->
-<!--        </div>-->
+        <div class="form-group form-group-hidden">
+            <label for="createdOn">Created On</label>
+            <input th:field="*{createdOn}" type="datetime-local" class="form-control" id="createdOn" placeholder="Created On" readonly>
+            <small th:if="${#fields.hasErrors('createdOn')}" th:errors="*{createdOn}" id="createdOnHelp" class="form-text text-danger">Invalid</small>
+        </div>
+
+        <div class="form-group form-group-hidden">
+            <label for="lastUpdatedById">Last Updated By ID</label>
+            <input th:field="*{lastUpdatedById}" type="number" class="form-control" id="lastUpdatedById" placeholder="Last updated by ID" readonly>
+            <small th:if="${#fields.hasErrors('lastUpdatedById')}" th:errors="*{lastUpdatedById}" id="lastUpdatedByIdHelp" class="form-text text-danger">Invalid</small>
+        </div>
+
+        <div class="form-group form-group-hidden">
+            <label for="lastUpdatedBy">Last Updated By</label>
+            <input th:field="*{lastUpdatedBy}" type="number" class="form-control" id="lastUpdatedBy" placeholder="Last updated by" readonly>
+            <small th:if="${#fields.hasErrors('lastUpdatedBy')}" th:errors="*{lastUpdatedBy}" id="lastUpdatedByHelp" class="form-text text-danger">Invalid</small>
+        </div>
+
+        <div class="form-group form-group-hidden">
+            <label for="lastUpdate">Last Update</label>
+            <input th:field="*{lastUpdate}" type="datetime-local" class="form-control" id="lastUpdate" placeholder="Last updated by" readonly>
+            <small th:if="${#fields.hasErrors('lastUpdate')}" th:errors="*{lastUpdate}" id="lastUpdateHelp" class="form-text text-danger">Invalid</small>
+        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     <!--    </div>-->

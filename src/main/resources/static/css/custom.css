@@ -69,3 +69,7 @@ hr {
 .text-centered {
     text-align: center;
 }
+
+.form-group-hidden {
+    display: none;
+}

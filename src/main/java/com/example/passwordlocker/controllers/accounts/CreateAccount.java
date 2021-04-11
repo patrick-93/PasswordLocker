@@ -2,8 +2,10 @@ package com.example.passwordlocker.controllers.accounts;
 
 import com.example.passwordlocker.config.PasswordConfig;
 import com.example.passwordlocker.models.Account;
+import com.example.passwordlocker.models.Log;
 import com.example.passwordlocker.models.User;
 import com.example.passwordlocker.repositories.AccountRepository;
+import com.example.passwordlocker.repositories.LogRepository;
 import com.example.passwordlocker.repositories.UserRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +24,10 @@ public class CreateAccount {
 
     @Autowired
     private AccountRepository accountRepository;
-
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private LogRepository logRepository;
 
     @Value("${app.secret-key}")
     private String key;
@@ -57,6 +60,12 @@ public class CreateAccount {
         account.setCreatedById(user.getUserId());
 
         accountRepository.save(account);
+
+        // Now build a log message and save
+        Log message = new Log();
+        message.setContent(user.getUsername() + " created " + account.getUsername());
+        logRepository.save(message);
+
         return "redirect:/accounts";
     }
 

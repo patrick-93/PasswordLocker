@@ -2,8 +2,10 @@ package com.example.passwordlocker.controllers.accounts;
 
 import com.example.passwordlocker.config.PasswordConfig;
 import com.example.passwordlocker.models.Account;
+import com.example.passwordlocker.models.Log;
 import com.example.passwordlocker.models.User;
 import com.example.passwordlocker.repositories.AccountRepository;
+import com.example.passwordlocker.repositories.LogRepository;
 import com.example.passwordlocker.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,14 +19,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.IOException;
+
 @Controller
 public class UpdateAccount {
 
     @Autowired
     private AccountRepository accountRepository;
-
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private LogRepository logRepository;
 
     @Value("${app.secret-key}")
     private String key;
@@ -35,6 +40,11 @@ public class UpdateAccount {
     @GetMapping(value="/accounts/edit")
     public String editAccountGet(@RequestParam(name = "id", required = true) long id, Model model) {
         Account account = accountRepository.findById(id).orElse(new Account());
+        try {
+            System.out.println("\n\nFound account created by" + account.getCreatedBy());
+        } catch (Exception e) {
+            System.out.println("\n\nDid not find a real account, using an empty one");
+        }
         model.addAttribute("account", account);
         model.addAttribute("pageTitle", "Edit Account");
         return "accounts/edit-account";
@@ -42,6 +52,7 @@ public class UpdateAccount {
 
     @PostMapping(value="/accounts/edit")
     public String editAccountPost(@ModelAttribute("account") Account account, BindingResult bindingResult) {
+        System.out.println("\n\nEdit account post created by " + account.getCreatedBy());
 
         // Get current logged in user to save the new account
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -58,6 +69,12 @@ public class UpdateAccount {
         account.setLastUpdatedById(user.getUserId());
 
         accountRepository.save(account);
+
+        // Now build a log message and save
+        Log message = new Log();
+        message.setContent(user.getUsername() + " modified " + account.getUsername());
+        logRepository.save(message);
+
         return "redirect:/accounts";
     }
 }
