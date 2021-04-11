@@ -1,5 +1,8 @@
 package com.example.passwordlocker.models;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -9,15 +12,18 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long userId;
 
+    @Column(unique = true)
     private String username;
     private String firstName;
     private String lastName;
     private String password;
     private String roles;
     private Boolean active;
+    @CreationTimestamp
     private Timestamp createdOn;
     private long createdById;
     private String createdBy;
+    @UpdateTimestamp
     private Timestamp lastUpdate;
     private long lastUpdatedById;
     private String lastUpdatedBy;
@@ -30,7 +36,7 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", password='" + password + '\'' +
-                ", role='" + roles + '\'' +
+                ", roles='" + roles + '\'' +
                 ", enabled=" + active +
                 ", createdOn=" + createdOn +
                 ", createdBy=" + createdBy +
@@ -125,5 +131,25 @@ public class User {
 
     public void setLastUpdatedBy(long lastUpdatedBy) {
         this.lastUpdatedById = lastUpdatedBy;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public long getLastUpdatedById() {
+        return lastUpdatedById;
+    }
+
+    public void setLastUpdatedById(long lastUpdatedById) {
+        this.lastUpdatedById = lastUpdatedById;
+    }
+
+    public void setLastUpdatedBy(String lastUpdatedBy) {
+        this.lastUpdatedBy = lastUpdatedBy;
     }
 }

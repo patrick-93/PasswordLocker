@@ -73,3 +73,11 @@ hr {
 .form-group-hidden {
     display: none;
 }
+
+.active-button {
+    margin-right: 10px;
+}
+
+.form-check-inline {
+    margin-bottom: 20px;
+}
