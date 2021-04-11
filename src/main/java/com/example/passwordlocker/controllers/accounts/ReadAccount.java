@@ -2,10 +2,16 @@ package com.example.passwordlocker.controllers.accounts;
 
 import com.example.passwordlocker.config.PasswordConfig;
 import com.example.passwordlocker.models.Account;
+import com.example.passwordlocker.models.Log;
+import com.example.passwordlocker.models.User;
 import com.example.passwordlocker.repositories.AccountRepository;
+import com.example.passwordlocker.repositories.LogRepository;
+import com.example.passwordlocker.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +28,11 @@ import java.util.*;
 public class ReadAccount {
 
     @Autowired
-    private AccountRepository repository;
+    private AccountRepository accountRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private LogRepository logRepository;
 
     @Value("${app.secret-key}")
     private String key;
@@ -33,13 +43,13 @@ public class ReadAccount {
     @GetMapping(value="")
     public ModelAndView showAll() {
         ModelAndView mav = new ModelAndView("accounts/accounts");
-        mav.addObject("accounts", repository.findAll());
+        mav.addObject("accounts", accountRepository.findAll());
         return mav;
     }
 
     @GetMapping("/details")
     public String accountDetail(@RequestParam(name = "id") long id, Model model) {
-        Account account = repository.findById(id).orElse(new Account());
+        Account account = accountRepository.findById(id).orElse(new Account());
 
         // Check if we have an actual account object, if not show an error page
         if (account.getUsername() != null) {
@@ -54,10 +64,17 @@ public class ReadAccount {
 
     @GetMapping("/showPassword")
     public String detailWithPassword(@RequestParam(name = "id") long id, Model model) {
-        Account account = repository.findById(id).orElse(new Account());
+        Account account = accountRepository.findById(id).orElse(new Account());
 
         // Check if we have an actual account object, if not show an error page
         if (account.getUsername() != null) {
+            // Valid account so log a message that a user viewed it
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            User user = userRepository.getUserByUsername(auth.getName());
+            logRepository.save(
+                    new Log(user.getUsername() + " viewed the password of " + account.getUsername())
+            );
+
             // Decrypt the password so it displays
             String encryptedPassword = account.getPassword();
             String decryptedPassword = PasswordConfig.decryptString(key, salt, encryptedPassword);

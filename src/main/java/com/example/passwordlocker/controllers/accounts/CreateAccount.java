@@ -62,9 +62,7 @@ public class CreateAccount {
         accountRepository.save(account);
 
         // Now build a log message and save
-        Log message = new Log();
-        message.setContent(user.getUsername() + " created " + account.getUsername());
-        logRepository.save(message);
+        logRepository.save(new Log(user.getUsername() + " created " + account.getUsername()));
 
         return "redirect:/accounts";
     }

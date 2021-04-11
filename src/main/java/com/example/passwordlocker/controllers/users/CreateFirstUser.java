@@ -1,6 +1,8 @@
 package com.example.passwordlocker.controllers.users;
 
+import com.example.passwordlocker.models.Log;
 import com.example.passwordlocker.models.User;
+import com.example.passwordlocker.repositories.LogRepository;
 import com.example.passwordlocker.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,7 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class CreateFirstUser {
 
     @Autowired
-    private UserRepository repository;
+    private UserRepository userRepository;
+    @Autowired
+    LogRepository logRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -42,12 +46,15 @@ public class CreateFirstUser {
         user.setUsername("admin");
         user.setRoles("ADMIN");
         user.setActive(true);
-        repository.save(user);
+        userRepository.save(user);
+
+        logRepository.save(new Log(user.getUsername() + " was created as a first user"));
+
         return "redirect:/";
     }
 
     private boolean checkIfAdminExists() {
-        User admin = repository.getUserByUsername("admin");
+        User admin = userRepository.getUserByUsername("admin");
         if (admin != null) { return true; }
         return false;
     }

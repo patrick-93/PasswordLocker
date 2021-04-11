@@ -18,6 +18,10 @@ public class Log {
     @CreationTimestamp
     private Timestamp timestamp;
 
+    public Log(String content) {
+        this.content = content;
+    }
+
 
     public long getLogId() {
         return logId;

@@ -40,11 +40,6 @@ public class UpdateAccount {
     @GetMapping(value="/accounts/edit")
     public String editAccountGet(@RequestParam(name = "id", required = true) long id, Model model) {
         Account account = accountRepository.findById(id).orElse(new Account());
-        try {
-            System.out.println("\n\nFound account created by" + account.getCreatedBy());
-        } catch (Exception e) {
-            System.out.println("\n\nDid not find a real account, using an empty one");
-        }
         model.addAttribute("account", account);
         model.addAttribute("pageTitle", "Edit Account");
         return "accounts/edit-account";
@@ -52,7 +47,6 @@ public class UpdateAccount {
 
     @PostMapping(value="/accounts/edit")
     public String editAccountPost(@ModelAttribute("account") Account account, BindingResult bindingResult) {
-        System.out.println("\n\nEdit account post created by " + account.getCreatedBy());
 
         // Get current logged in user to save the new account
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -71,9 +65,7 @@ public class UpdateAccount {
         accountRepository.save(account);
 
         // Now build a log message and save
-        Log message = new Log();
-        message.setContent(user.getUsername() + " modified " + account.getUsername());
-        logRepository.save(message);
+        logRepository.save(new Log(user.getUsername() + " modified " + account.getUsername()));
 
         return "redirect:/accounts";
     }
