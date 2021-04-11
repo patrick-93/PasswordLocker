@@ -16,9 +16,11 @@ public class User {
     private String roles;
     private Boolean active;
     private Timestamp createdOn;
-    private long createdBy;
+    private long createdById;
+    private String createdBy;
     private Timestamp lastUpdate;
-    private long lastUpdatedBy;
+    private long lastUpdatedById;
+    private String lastUpdatedBy;
 
     @Override
     public String toString() {
@@ -31,9 +33,9 @@ public class User {
                 ", role='" + roles + '\'' +
                 ", enabled=" + active +
                 ", createdOn=" + createdOn +
-                ", createdBy=" + createdBy +
+                ", createdBy=" + createdById +
                 ", lastUpdate=" + lastUpdate +
-                ", lastUpdatedBy=" + lastUpdatedBy +
+                ", lastUpdatedBy=" + lastUpdatedById +
                 '}';
     }
 
@@ -101,12 +103,12 @@ public class User {
         this.createdOn = createdOn;
     }
 
-    public long getCreatedBy() {
-        return createdBy;
+    public long getCreatedById() {
+        return createdById;
     }
 
-    public void setCreatedBy(long createdBy) {
-        this.createdBy = createdBy;
+    public void setCreatedById(long createdById) {
+        this.createdById = createdById;
     }
 
     public Timestamp getLastUpdate() {
@@ -118,10 +120,10 @@ public class User {
     }
 
     public long getLastUpdatedBy() {
-        return lastUpdatedBy;
+        return lastUpdatedById;
     }
 
     public void setLastUpdatedBy(long lastUpdatedBy) {
-        this.lastUpdatedBy = lastUpdatedBy;
+        this.lastUpdatedById = lastUpdatedBy;
     }
 }

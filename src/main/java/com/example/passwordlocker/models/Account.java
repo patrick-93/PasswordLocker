@@ -5,7 +5,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Set;
 
 @Entity
 public class Account {
@@ -19,11 +18,12 @@ public class Account {
     private String type;
     @CreationTimestamp
     private Timestamp createdOn;
-    private long createdBy;
+    private long createdById;
+    private String createdBy;
     @UpdateTimestamp
     private Timestamp lastUpdate;
-    private long lastUpdatedBy;
-
+    private long lastUpdatedById;
+    private String lastUpdatedBy;
 
     @Override
     public String toString() {
@@ -88,12 +88,12 @@ public class Account {
         this.createdOn = createdOn;
     }
 
-    public long getCreatedBy() {
-        return createdBy;
+    public long getCreatedById() {
+        return createdById;
     }
 
-    public void setCreatedBy(long createdBy) {
-        this.createdBy = createdBy;
+    public void setCreatedById(long createdById) {
+        this.createdById = createdById;
     }
 
     public Timestamp getLastUpdate() {
@@ -104,11 +104,27 @@ public class Account {
         this.lastUpdate = lastUpdate;
     }
 
-    public long getLastUpdatedBy() {
+    public long getLastUpdatedById() {
+        return lastUpdatedById;
+    }
+
+    public void setLastUpdatedById(long lastUpdatedById) {
+        this.lastUpdatedById = lastUpdatedById;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public String getLastUpdatedBy() {
         return lastUpdatedBy;
     }
 
-    public void setLastUpdatedBy(long lastUpdatedBy) {
+    public void setLastUpdatedBy(String lastUpdatedBy) {
         this.lastUpdatedBy = lastUpdatedBy;
     }
 }
