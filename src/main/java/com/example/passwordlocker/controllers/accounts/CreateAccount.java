@@ -2,10 +2,14 @@ package com.example.passwordlocker.controllers.accounts;
 
 import com.example.passwordlocker.config.PasswordConfig;
 import com.example.passwordlocker.models.Account;
+import com.example.passwordlocker.models.User;
 import com.example.passwordlocker.repositories.AccountRepository;
+import com.example.passwordlocker.repositories.UserRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +21,10 @@ import javax.validation.Valid;
 public class CreateAccount {
 
     @Autowired
-    private AccountRepository repository;
+    private AccountRepository accountRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Value("${app.secret-key}")
     private String key;
@@ -35,14 +42,21 @@ public class CreateAccount {
     @PostMapping(value={"/", ""})
     public String createAccountPost(@ModelAttribute("account") Account account, BindingResult bindingResult) {
 
+        // Get current logged in user to save the new account
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.getUserByUsername(auth.getName());
+
+        // Check for errors
         if (bindingResult.hasErrors()) {
             return "accounts/create-account";
         }
-        String oldPassword = account.getPassword();
-        String newPassword = PasswordConfig.encryptString(key, salt, oldPassword);
-        account.setPassword(newPassword);
 
-        repository.save(account);
+        // Encrypt the password and set the created by fields
+        account.setPassword(PasswordConfig.encryptString(key, salt, account.getPassword()));
+        account.setCreatedBy(user.getUsername());
+        account.setCreatedById(user.getUserId());
+
+        accountRepository.save(account);
         return "redirect:/accounts";
     }
 
