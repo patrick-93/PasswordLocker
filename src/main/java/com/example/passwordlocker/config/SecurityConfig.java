@@ -24,6 +24,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Timestamp;
 
 @Configuration
 @EnableWebSecurity
@@ -53,6 +54,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     @Override
                     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication auth) throws IOException, ServletException {
                         User user = userRepository.getUserByUsername(auth.getName());
+                        Long datetime = System.currentTimeMillis();
+                        user.setLastLogin(new Timestamp(datetime));
+                        userRepository.save(user);
                         logRepository.save(new Log(user.getUsername() + " logged in"));
                         response.sendRedirect(request.getContextPath());
                     }

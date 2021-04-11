@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/css/custom.css" rel="stylesheet" type="text/css" />
+    <script src="/js/jquery-3.5.1.slim.min.js" type="application/javascript"></script>
+    <script src="/js/popper.min.js" type="application/javascript"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+    <title>Title</title>
+</head>
+<body>
+<div class="container main-container">
+    <div th:replace="fragments/navbar :: nav"></div>
+    <table class="table">
+        <thead>
+            <th scope="col">Last Name</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Username</th>
+            <th scope="col">Active</th>
+            <th scope="col">Role</th>
+            <th scope="col">Last login</th>
+        </thead>
+        <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.lastName}"></td>
+                <td th:text="${user.firstName}"></td>
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.active}"></td>
+                <td th:text="${user.roles}"></td>
+                <td th:text="${user.lastLogin}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <footer>
+
+    </footer>
+</div> <!-- End of main container -->
+
+</body>
+</html>

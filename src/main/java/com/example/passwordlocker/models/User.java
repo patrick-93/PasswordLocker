@@ -27,6 +27,7 @@ public class User {
     private Timestamp lastUpdate;
     private long lastUpdatedById;
     private String lastUpdatedBy;
+    private Timestamp lastLogin;
 
     @Override
     public String toString() {
@@ -151,5 +152,13 @@ public class User {
 
     public void setLastUpdatedBy(String lastUpdatedBy) {
         this.lastUpdatedBy = lastUpdatedBy;
+    }
+
+    public Timestamp getLastLogin() {
+        return lastLogin;
+    }
+
+    public void setLastLogin(Timestamp lastLogin) {
+        this.lastLogin = lastLogin;
     }
 }
