@@ -33,9 +33,9 @@ public class User {
                 ", role='" + roles + '\'' +
                 ", enabled=" + active +
                 ", createdOn=" + createdOn +
-                ", createdBy=" + createdById +
+                ", createdBy=" + createdBy +
                 ", lastUpdate=" + lastUpdate +
-                ", lastUpdatedBy=" + lastUpdatedById +
+                ", lastUpdatedBy=" + lastUpdatedBy +
                 '}';
     }
 
