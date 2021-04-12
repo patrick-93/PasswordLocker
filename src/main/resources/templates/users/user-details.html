@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/css/custom.css" rel="stylesheet" type="text/css" />
+    <script src="/js/jquery-3.5.1.slim.min.js" type="application/javascript"></script>
+    <script src="/js/popper.min.js" type="application/javascript"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+    <title>Title</title>
+</head>
+<body>
+<div class="container main-container">
+    <div th:replace="fragments/navbar :: nav"></div>
+    <!--
+            <td th:text="${user.lastName}"></td>
+            <td th:text="${user.firstName}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.active}"></td>
+            <td th:text="${user.roles}"></td>
+            <td th:text="${user.lastLogin}"></td>
+    -->
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <h2 th:if="${userNotFound}" th:text="${userNotFound}"></h2>
+            <h2 th:text="${user.lastName} + ', ' + ${user.firstName}"></h2>
+            <hr>
+            <h4 th:text="'Username: ' + ${user.username}"></h4>
+            <h4 th:text="'Active: ' + ${user.active}"></h4>
+            <h4 th:text="'Role: ' + ${user.roles}"></h4>
+            <h4 th:text="'Created: ' + ${user.createdOn}"></h4>
+            <h4 th:text="'Created By: ' + ${user.createdBy}"></h4>
+            <h4 th:text="'Last updated: ' + ${user.lastUpdate}"></h4>
+            <h4 th:text="'Last Updated By: ' + ${user.lastUpdatedBy}"></h4>
+            <h4 th:text="'Last Login: ' + ${user.lastLogin}"></h4>
+        </div>
+    </div>
+
+    <footer>
+
+    </footer>
+</div> <!-- End of main container -->
+
+</body>
+</html>
