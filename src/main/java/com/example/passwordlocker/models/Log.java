@@ -18,6 +18,10 @@ public class Log {
     @CreationTimestamp
     private Timestamp timestamp;
 
+    // Default constructor
+    public Log() {}
+
+    // Custom constructor
     public Log(String content) {
         this.content = content;
     }

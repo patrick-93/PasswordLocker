@@ -38,7 +38,6 @@ public class DeleteAccount {
 
         if (accountRepository.existsById(id)) {
             accountRepository.deleteById(id);
-            
             logRepository.save(new Log(currentUser.getUsername() + " deleted " + account.getUsername()));
         }
         return "redirect:/accounts";
