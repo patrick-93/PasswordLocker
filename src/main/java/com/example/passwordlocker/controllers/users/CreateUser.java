@@ -29,12 +29,30 @@ public class CreateUser {
 
     @GetMapping("/users/create")
     public String createUserGet(Model model) {
+        // Get current logged in user
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = userRepository.getUserByUsername(auth.getName());
+
+        // Check if user has role of ADMIN, if not return the unauthorized page
+        if (!currentUser.getRoles().equals("ADMIN")) {
+            return "errors/unauthorized-access";
+        }
+
         model.addAttribute("user", new User());
         return "users/create-user";
     }
 
     @PostMapping("/users/create")
     public String createUserPost(@ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
+        // Get current logged in user
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = userRepository.getUserByUsername(auth.getName());
+
+        // Check if user has role of ADMIN, if not return the unauthorized page
+        if (!currentUser.getRoles().equals("ADMIN")) {
+            return "errors/unauthorized-access";
+        }
+
         // Check if username already exists
         String username = user.getUsername();
         User check = userRepository.getUserByUsername(username);
@@ -42,10 +60,6 @@ public class CreateUser {
             model.addAttribute("invalidUsername", "Username already exists");
             return "users/create-user";
         }
-
-        // Get current logged in user
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User currentUser = userRepository.getUserByUsername(auth.getName());
 
         // Check for errors
         if (bindingResult.hasErrors()) {

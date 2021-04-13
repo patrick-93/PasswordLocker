@@ -64,15 +64,23 @@ public class ReadAccount {
 
     @GetMapping("/showPassword")
     public String detailWithPassword(@RequestParam(name = "id") long id, Model model) {
+        // Get current logged in user
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = userRepository.getUserByUsername(auth.getName());
+
+        // Check if user is an auditor, show unauthorized page if so
+        if (currentUser.getRoles().equals("AUDITOR")) {
+            return "errors/unauthorized-access";
+        }
+
         Account account = accountRepository.findById(id).orElse(new Account());
 
         // Check if we have an actual account object, if not show an error page
         if (account.getUsername() != null) {
             // Valid account so log a message that a user viewed it
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            User user = userRepository.getUserByUsername(auth.getName());
+
             logRepository.save(
-                    new Log(user.getUsername() + " viewed the password of " + account.getUsername())
+                    new Log(currentUser.getUsername() + " viewed the password of " + account.getUsername())
             );
 
             // Decrypt the password so it displays

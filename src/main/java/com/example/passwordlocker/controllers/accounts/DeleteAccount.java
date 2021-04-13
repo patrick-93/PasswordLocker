@@ -25,15 +25,21 @@ public class DeleteAccount {
 
     @GetMapping("/accounts/delete")
     public String deleteAccount(@RequestParam(name="id", required = true) long id) {
+        // Get current logged in user
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = userRepository.getUserByUsername(auth.getName());
+
+        // Check if user has role of ADMIN, if not return the unauthorized page
+        if (!currentUser.getRoles().equals("ADMIN")) {
+            return "errors/unauthorized-access";
+        }
+
         Account account = accountRepository.findById(id).orElse(new Account());
 
         if (accountRepository.existsById(id)) {
             accountRepository.deleteById(id);
-
-            // Now log a message that a user deleted an account
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            User user = userRepository.getUserByUsername(auth.getName());
-            logRepository.save(new Log(user.getUsername() + " deleted " + account.getUsername()));
+            
+            logRepository.save(new Log(currentUser.getUsername() + " deleted " + account.getUsername()));
         }
         return "redirect:/accounts";
     }
