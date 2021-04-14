@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/custom.css" rel="stylesheet" />
+    <script src="/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <title>Password Locker - Users</title>
+</head>
+<body>
+<div class="container main-container">
+    <div th:replace="fragments/navbar :: nav"></div>
+    <h1 class="h1-page-header">Edit User</h1>
+    <!--    <div class="row" >-->
+    <form th:action="@{/users/edit}" th:object="${user}" action="#" method="post">
+        <div class="form-group">
+            <label for="userId">ID</label>
+            <input th:field="*{userId}" type="number" class="form-control" id="userId" placeholder="ID" readonly/>
+            <small th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" id="userIdHelp" class="form-text text-danger">Invalid</small>
+        </div>
+
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input th:field="*{username}" type="text" class="form-control" id="username" placeholder="Username"/>
+            <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" id="usernameHelp" class="form-text text-danger">Invalid</small>
+        </div>
+
+        <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input th:field="*{firstName}" type="text" class="form-control" id="firstName" placeholder="First name"/>
+            <small th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" id="firstNameHelp" class="form-text text-danger">Invalid</small>
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input th:field="*{lastName}" type="text" class="form-control" id="lastName" placeholder="Last name"/>
+            <small th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" id="lastNameHelp" class="form-text text-danger">Invalid</small>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input th:field="*{password}" type="password" class="form-control" id="password" placeholder="Password">
+            <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" id="passwordHelp" class="form-text text-danger">Invalid</small>
+        </div>
+
+        <div class="form-group form-group-hidden">
+            <label for="createdById">Created By ID</label>
+            <input th:field="*{createdById}" type="number" class="form-control" id="createdById" placeholder="Created By ID" readonly>
+            <small th:if="${#fields.hasErrors('createdById')}" th:errors="*{createdById}" id="createdByIdHelp" class="form-text text-danger">Invalid</small>
+        </div>
+
+        <div class="form-group form-group-hidden">
+            <label for="createdBy">Created By</label>
+            <input th:field="*{createdBy}" type="text" class="form-control" id="createdBy" placeholder="Created By" readonly>
+            <small th:if="${#fields.hasErrors('createdBy')}" th:errors="*{createdBy}" id="createdByHelp" class="form-text text-danger">Invalid</small>
+        </div>
+
+        <div class="form-group form-group-hidden">
+            <label for="createdOn">Created On</label>
+            <input th:field="*{createdOn}" type="datetime-local" class="form-control" id="createdOn" placeholder="Created On" readonly>
+            <small th:if="${#fields.hasErrors('createdOn')}" th:errors="*{createdOn}" id="createdOnHelp" class="form-text text-danger">Invalid</small>
+        </div>
+
+        <div class="form-group form-group-hidden">
+            <label for="lastUpdatedById">Last Updated By ID</label>
+            <input th:field="*{lastUpdatedById}" type="number" class="form-control" id="lastUpdatedById" placeholder="Last updated by ID" readonly>
+            <small th:if="${#fields.hasErrors('lastUpdatedById')}" th:errors="*{lastUpdatedById}" id="lastUpdatedByIdHelp" class="form-text text-danger">Invalid</small>
+        </div>
+
+        <div class="form-group form-group-hidden">
+            <label for="lastUpdatedBy">Last Updated By</label>
+            <input th:field="*{lastUpdatedBy}" type="number" class="form-control" id="lastUpdatedBy" placeholder="Last updated by" readonly>
+            <small th:if="${#fields.hasErrors('lastUpdatedBy')}" th:errors="*{lastUpdatedBy}" id="lastUpdatedByHelp" class="form-text text-danger">Invalid</small>
+        </div>
+
+        <div class="form-group form-group-hidden">
+            <label for="lastUpdate">Last Update</label>
+            <input th:field="*{lastUpdate}" type="datetime-local" class="form-control" id="lastUpdate" placeholder="Last updated by" readonly>
+            <small th:if="${#fields.hasErrors('lastUpdate')}" th:errors="*{lastUpdate}" id="lastUpdateHelp" class="form-text text-danger">Invalid</small>
+        </div>
+
+        <div class="form-group form-group-hidden">
+            <label for="lastLogin">Last login</label>
+            <input th:field="*{lastLogin}" type="datetime-local" class="form-control" id="lastLogin" readonly>
+            <small th:if="${#fields.hasErrors('lastLogin')}" th:errors="*{lastLogin}" id="lastLoginHelp" class="form-text text-danger">Invalid</small>
+        </div>
+
+        <div class="form-group form-group-hidden">
+            <label for="roles">Roles</label>
+            <input th:field="*{roles}" type="text" class="form-control" id="roles" placeholder="roles" readonly>
+            <small th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}" id="rolesHelp" class="form-text text-danger">Invalid</small>
+        </div>
+
+        <div class="form-group form-group-hidden">
+            <label for="active">Active</label>
+            <input th:field="*{active}" type="text" class="form-control" id="active" placeholder="active" readonly>
+            <small th:if="${#fields.hasErrors('active')}" th:errors="*{active}" id="activeHelp" class="form-text text-danger">Invalid</small>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <!--    </div>-->
+    <footer>
+
+    </footer>
+</div> <!-- End of main container -->
+
+</body>
+</html>
