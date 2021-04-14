@@ -13,12 +13,14 @@ import java.util.stream.Collectors;
 public class UserDetailsConfig implements UserDetails {
 
     private User user;
+    private long userId;
     private String username;
     private String password;
     private boolean active;
     private List<GrantedAuthority> authorities;
 
     public UserDetailsConfig(User user) {
+        this.userId = user.getUserId();
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.active = user.getActive();
@@ -61,4 +63,6 @@ public class UserDetailsConfig implements UserDetails {
     public boolean isEnabled() {
         return active;
     }
+
+    public long getUserId() { return userId; }
 }
