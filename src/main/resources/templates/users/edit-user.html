@@ -24,7 +24,7 @@
 
         <div class="form-group">
             <label for="username">Username</label>
-            <input th:field="*{username}" type="text" class="form-control" id="username" placeholder="Username"/>
+            <input th:field="*{username}" type="text" class="form-control" id="username" placeholder="Username" readonly/>
             <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" id="usernameHelp" class="form-text text-danger">Invalid</small>
         </div>
 
