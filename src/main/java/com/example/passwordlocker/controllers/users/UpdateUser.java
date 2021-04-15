@@ -77,6 +77,72 @@ public class UpdateUser {
         if (!user.getPassword().isEmpty()) {
             originalUser.setPassword(passwordEncoder.encode(user.getPassword()));
         }
+        originalUser.setLastUpdatedById(user.getUserId());
+        originalUser.setLastUpdatedBy(user.getUsername());
+
+        // Now save the originalUser and log a message
+        userRepository.save(originalUser);
+        logRepository.save(new Log(currentUser.getUsername() + " modified " + originalUser.getUsername()));
+
+        return "redirect:/";
+    }
+
+    // Get mapping the admin to edit a user
+    @GetMapping("/users/admin/edit")
+    public String editUserAdminGet(@RequestParam(name = "id", required = true) long id, Model model) {
+        // find the user with the id param
+        User user = userRepository.findById(id).orElse(new User());
+
+        // Check if we found a real user
+        if (user.getUsername() == null) {
+            return "errors/user-error";
+        }
+
+        // Get current logged in user
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = userRepository.getUserByUsername(auth.getName());
+
+        // Found a valid user so check if currentUser is either admin or the found user
+        if (currentUser.getRoles().equals("ADMIN")) {
+            // User has permissions to edit so show edit page
+            model.addAttribute("user", user);
+            return "users/admin-edit-user";
+        }
+        // Current user is not the user to be edited
+        return "errors/unauthorized-access";
+    }
+
+    @PostMapping("/users/admin/edit")
+    public String editUserAdminPost(@ModelAttribute("user") User user, BindingResult bindingResult) {
+        // Get current logged in user
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = userRepository.getUserByUsername(auth.getName());
+
+        // Make sure currentUser is the same one trying to be modified
+        if (!currentUser.getRoles().equals("ADMIN")) {
+            return "errors/unauthorized-access";
+        }
+
+        // currentUser is an admin so get the original user
+        User originalUser = userRepository.findById(user.getUserId()).orElse(new User());
+
+        // Now check to make sure properties aren't null and modify
+        // the originalUser with fields from the edit-user form
+        if (!user.getFirstName().isEmpty()) {
+            originalUser.setFirstName(user.getFirstName());
+        }
+        if (!user.getLastName().isEmpty()) {
+            originalUser.setLastName(user.getLastName());
+        }
+        if (!user.getPassword().isEmpty()) {
+            originalUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
+        if (!user.getUsername().isEmpty()) {
+            originalUser.setUsername(user.getUsername());
+        }
+
+        originalUser.setLastUpdatedById(user.getUserId());
+        originalUser.setLastUpdatedBy(user.getUsername());
 
         // Now save the originalUser and log a message
         userRepository.save(originalUser);

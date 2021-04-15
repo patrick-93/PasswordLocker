@@ -130,10 +130,6 @@ public class User {
         return lastUpdatedById;
     }
 
-    public void setLastUpdatedBy(long lastUpdatedBy) {
-        this.lastUpdatedById = lastUpdatedBy;
-    }
-
     public String getCreatedBy() {
         return createdBy;
     }

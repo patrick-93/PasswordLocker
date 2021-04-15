@@ -26,7 +26,7 @@
             <h2 th:if="${userNotFound}" th:text="${userNotFound}"></h2>
             <div th:if="${user}">
                 <h2 th:text="${user.lastName} + ', ' + ${user.firstName}"></h2>
-                <a th:href="@{/users/edit(id=${user.userId})}"
+                <a th:href="@{/users/admin/edit(id=${user.userId})}"
                    sec:authorize="hasAuthority('ADMIN')"
                    th:text="Edit"
                    class="btn btn-warning"

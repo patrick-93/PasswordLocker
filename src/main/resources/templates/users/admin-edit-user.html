@@ -24,7 +24,7 @@
 
         <div class="form-group">
             <label for="username">Username</label>
-            <input th:field="*{username}" type="text" class="form-control" id="username" placeholder="Username" readonly/>
+            <input th:field="*{username}" type="text" class="form-control" id="username" placeholder="Username"/>
             <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" id="usernameHelp" class="form-text text-danger">Invalid</small>
         </div>
 
@@ -88,16 +88,30 @@
             <small th:if="${#fields.hasErrors('lastLogin')}" th:errors="*{lastLogin}" id="lastLoginHelp" class="form-text text-danger">Invalid</small>
         </div>
 
-        <div class="form-group form-group-hidden">
-            <label for="roles">Roles</label>
-            <input th:field="*{roles}" type="text" class="form-control" id="roles" placeholder="roles" readonly>
-            <small th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}" id="rolesHelp" class="form-text text-danger">Invalid</small>
+        <div class="form-group">
+            <div class="form-check form-check-inline">
+                <label class="form-check-label active-button" for="radioUser">User</label>
+                <input th:field="*{roles}" th:checked="*{roles} == 'USER'"class="form-check-input" type="radio" name="radioUser" id="radioUser" value="USER">
+            </div>
+            <div class="form-check form-check-inline">
+                <label class="form-check-label active-button" for="radioAuditor">Auditor</label>
+                <input th:field="*{roles}" th:checked="*{roles} == 'AUDITOR'" class="form-check-input" type="radio" name="radioAuditor" id="radioAuditor" value="AUDITOR">
+            </div>
+            <div class="form-check form-check-inline">
+                <label class="form-check-label active-button" for="radioAdmin">Admin</label>
+                <input th:field="*{roles}" th:checked="*{roles} == 'ADMIN'" class="form-check-input" type="radio" name="radioAdmin" id="radioAdmin" value="ADMIN">
+            </div>
         </div>
 
-        <div class="form-group form-group-hidden">
-            <label for="active">Active</label>
-            <input th:field="*{active}" type="text" class="form-control" id="active" placeholder="active" readonly>
-            <small th:if="${#fields.hasErrors('active')}" th:errors="*{active}" id="activeHelp" class="form-text text-danger">Invalid</small>
+        <div class="form-group">
+            <div class="form-check form-check-inline">
+                <label class="form-check-label active-button" for="radioActive">Enabled</label>
+                <input th:field="*{active}" th:checked="*{active} == true"class="form-check-input" type="radio" name="radioActive" id="radioActive" value="1">
+            </div>
+            <div class="form-check form-check-inline">
+                <label class="form-check-label active-button" for="radioInactive">Disabled</label>
+                <input th:field="*{active}" th:checked="*{active} == false" class="form-check-input" type="radio" name="radioInactive" id="radioInactive" value="0">
+            </div>
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
