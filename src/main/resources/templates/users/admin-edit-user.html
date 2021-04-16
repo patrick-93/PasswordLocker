@@ -15,7 +15,7 @@
     <div th:replace="fragments/navbar :: nav"></div>
     <h1 class="h1-page-header">Edit User</h1>
     <!--    <div class="row" >-->
-    <form th:action="@{/users/edit}" th:object="${user}" action="#" method="post">
+    <form th:action="@{/users/admin/edit}" th:object="${user}" action="#" method="post">
         <div class="form-group">
             <label for="userId">ID</label>
             <input th:field="*{userId}" type="number" class="form-control" id="userId" placeholder="ID" readonly/>

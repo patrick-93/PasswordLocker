@@ -126,8 +126,8 @@ public class User {
         this.lastUpdate = lastUpdate;
     }
 
-    public long getLastUpdatedBy() {
-        return lastUpdatedById;
+    public String getLastUpdatedBy() {
+        return lastUpdatedBy;
     }
 
     public String getCreatedBy() {

@@ -87,7 +87,7 @@ public class UpdateUser {
         return "redirect:/";
     }
 
-    // Get mapping the admin to edit a user
+    // Get mapping the admin user edit
     @GetMapping("/users/admin/edit")
     public String editUserAdminGet(@RequestParam(name = "id", required = true) long id, Model model) {
         // find the user with the id param
@@ -140,9 +140,10 @@ public class UpdateUser {
         if (!user.getUsername().isEmpty()) {
             originalUser.setUsername(user.getUsername());
         }
-
-        originalUser.setLastUpdatedById(user.getUserId());
-        originalUser.setLastUpdatedBy(user.getUsername());
+        originalUser.setRoles(user.getRoles());
+        originalUser.setActive(user.getActive());
+        originalUser.setLastUpdatedById(currentUser.getUserId());
+        originalUser.setLastUpdatedBy(currentUser.getUsername());
 
         // Now save the originalUser and log a message
         userRepository.save(originalUser);
