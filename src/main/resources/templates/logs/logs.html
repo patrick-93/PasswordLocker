@@ -13,6 +13,33 @@
 <body>
 <div class="container main-container">
     <div th:replace="fragments/navbar :: nav"></div>
+
+    <form th:action="@{/logs/search}" action="#" method="post" style="margin-bottom: 20px;">
+<!--        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="year">Year</label>
+                    <input th:value="${year}" type="number" name="year" class="form-control" id="year" placeholder="2020">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="month">Month</label>
+                    <input th:value="${month}" type="number" name="month" class="form-control" id="month" min="1" max="12" placeholder="1 - 12">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="day">Day</label>
+                    <input th:value="${day}" type="number" name="day" class="form-control" id="day" min="1" max="31" placeholder="1 - 31">
+                </div>
+            </div>
+
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-left: 18px;">Search</button>
+    </form>
+
     <table class="table">
         <thead>
         <th scope="col">ID</th>
