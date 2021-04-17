@@ -50,8 +50,6 @@ public class LogController {
             @RequestParam(name = "day") int day,
             Model model) {
 
-        System.out.println("\n\nReceived year: " + year + ", received month: " + month + ", received day: " + day + "\n\n");
-
         // Get current logged in user
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = userRepository.getUserByUsername(auth.getName());
@@ -63,7 +61,6 @@ public class LogController {
         boolean checkYear = validateYear(year);
         boolean checkMonth = validateMonth(month);
         boolean checkDay = validateDay(day);
-
 
         // Get a list of all logs and create a new ArrayList to add logs to by year
         List<Log> allLogs = logRepository.findAllByOrderByTimestampDesc();
@@ -77,11 +74,6 @@ public class LogController {
             for (Log log : allLogs) {
                 // Set the calendar instance to the current timestamp of each log
                 cal.setTimeInMillis(log.getTimestamp().getTime());
-
-                System.out.println("\n\nLooping through logs, currently have time of " +
-                        "Year: " + cal.get(Calendar.YEAR) + ", Month: " + cal.get(Calendar.MONTH) +
-                        ", Day: " + cal.get(Calendar.DAY_OF_MONTH));
-
                 if (
                         cal.get(Calendar.YEAR) == year
                                 && cal.get(Calendar.MONTH) + 1 == month
@@ -102,8 +94,6 @@ public class LogController {
             @RequestParam(name = "year") int year,
             @RequestParam(name = "month") int month,
             Model model) {
-
-        System.out.println("\n\nReceived year: " + year + ", received month: " + month + "\n\n");
 
         // Get current logged in user
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -129,9 +119,6 @@ public class LogController {
                 // Set the calendar instance to the current timestamp of each log
                 cal.setTimeInMillis(log.getTimestamp().getTime());
 
-                System.out.println("\n\nLooping through logs, currently have time of " +
-                        "Year: " + cal.get(Calendar.YEAR) + ", Month: " + cal.get(Calendar.MONTH));
-
                 if (cal.get(Calendar.YEAR) == year && cal.get(Calendar.MONTH) + 1 == month) {
                     searchedLogs.add(log);
                 }
@@ -148,8 +135,6 @@ public class LogController {
     public String searchLogs(
             @RequestParam(name = "year") int year,
             Model model) {
-
-        System.out.println("\n\nReceived year: " + year + ", received month: " + "\n\n");
 
         // Get current logged in user
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -173,10 +158,6 @@ public class LogController {
             for (Log log : allLogs) {
                 // Set the calendar instance to the current timestamp of each log
                 cal.setTimeInMillis(log.getTimestamp().getTime());
-
-                System.out.println("\n\nLooping through logs, currently have time of " +
-                        "Year: " + cal.get(Calendar.YEAR));
-
                 if (cal.get(Calendar.YEAR) == year) {
                     searchedLogs.add(log);
                 }
@@ -188,7 +169,6 @@ public class LogController {
         model.addAttribute("logs", searchedLogs);
         return "logs/logs";
     }
-
 
     private boolean validateYear(int year) {
         return year > 2000 && year < 3000;
