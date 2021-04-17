@@ -14,31 +14,104 @@
 <div class="container main-container">
     <div th:replace="fragments/navbar :: nav"></div>
 
-    <form th:action="@{/logs/search}" action="#" method="post" style="margin-bottom: 20px;">
-<!--        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
-        <div class="row">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="year">Year</label>
-                    <input th:value="${year}" type="number" name="year" class="form-control" id="year" placeholder="2020">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="month">Month</label>
-                    <input th:value="${month}" type="number" name="month" class="form-control" id="month" min="1" max="12" placeholder="1 - 12">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="day">Day</label>
-                    <input th:value="${day}" type="number" name="day" class="form-control" id="day" min="1" max="31" placeholder="1 - 31">
-                </div>
-            </div>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active"
+               id="search-year-tab"
+               data-toggle="tab"
+               href="#search-year"
+               role="tab"
+               aria-controls="search-year"
+               aria-selected="true">Search by year</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"
+               id="search-year-month-tab"
+               data-toggle="tab"
+               href="#search-year-month"
+               role="tab"
+               aria-controls="search-year-month"
+               aria-selected="false">Search by year/month</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"
+               id="search-year-month-day-tab"
+               data-toggle="tab"
+               href="#search-year-month-day"
+               role="tab"
+               aria-controls="search-year-month-day"
+               aria-selected="false">Search by year/month/day</a>
+        </li>
+    </ul>
 
+    <div class="tab-content" id="myTabContent">
+        <!-- Search year tab-->
+        <div class="tab-pane fade show active" id="search-year" role="tabpanel" aria-labelledby="search-year-tab">
+            <form th:action="@{/logs/search-year}" action="#" method="post" style="margin-bottom: 20px; margin-top: 20px;">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="year">Year</label>
+                            <input th:value="${year}" type="number" name="year" class="form-control" id="year" placeholder="2020">
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-left: 18px;">Search</button>
+            </form>
         </div>
-        <button type="submit" class="btn btn-primary" style="margin-left: 18px;">Search</button>
-    </form>
+        <!-- End search year tab -->
+
+        <!-- Search year month tab -->
+        <div class="tab-pane fade" id="search-year-month" role="tabpanel" aria-labelledby="search-year-month-tab">
+            <form th:action="@{/logs/search-year-month}" action="#" method="post" style="margin-bottom: 20px; margin-top: 20px;">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="year">Year</label>
+                            <input th:value="${year}" type="number" name="year" class="form-control" id="input-year-year-month" placeholder="2020">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="month">Month</label>
+                            <input th:value="${month}" type="number" name="month" class="form-control" id="input-month-year-month" min="1" max="12" placeholder="1 - 12">
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-left: 18px;">Search</button>
+            </form>
+        </div>
+        <!-- End search year month tab -->
+
+        <!-- Search year month day tab -->
+        <div class="tab-pane fade" id="search-year-month-day" role="tabpanel" aria-labelledby="search-year-month-day-tab">
+            <form th:action="@{/logs/search-year-month-day}" action="#" method="post" style="margin-bottom: 20px; margin-top: 20px;">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="year">Year</label>
+                            <input th:value="${year}" type="number" name="year" class="form-control" id="input-year" placeholder="2020">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="month">Month</label>
+                            <input th:value="${month}" type="number" name="month" class="form-control" id="month" min="1" max="12" placeholder="1 - 12">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="day">Day</label>
+                            <input th:value="${day}" type="number" name="day" class="form-control" id="day" min="1" max="31" placeholder="1 - 31">
+                        </div>
+                    </div>
+
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-left: 18px;">Search</button>
+            </form>
+        </div>
+        <!-- End search year month day tab -->
+    </div>
 
     <table class="table">
         <thead>

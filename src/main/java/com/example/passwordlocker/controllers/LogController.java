@@ -43,11 +43,11 @@ public class LogController {
         return "logs/logs";
     }
 
-    @PostMapping(value = "/search") //, params = {"year", "month", "day"}
+    @PostMapping(value = "/search-year-month-day") //, params = {"year", "month", "day"}
     public String searchLogs(
-            @RequestParam(name = "year", required = false) int year,
-            @RequestParam(name = "month", required = false) int month,
-            @RequestParam(name = "day", required = false) int day,
+            @RequestParam(name = "year") int year,
+            @RequestParam(name = "month") int month,
+            @RequestParam(name = "day") int day,
             Model model) {
 
         System.out.println("\n\nReceived year: " + year + ", received month: " + month + ", received day: " + day + "\n\n");
@@ -78,7 +78,7 @@ public class LogController {
                 // Set the calendar instance to the current timestamp of each log
                 cal.setTimeInMillis(log.getTimestamp().getTime());
 
-                System.out.println("\n\nLooping through lots, currently have time of " +
+                System.out.println("\n\nLooping through logs, currently have time of " +
                         "Year: " + cal.get(Calendar.YEAR) + ", Month: " + cal.get(Calendar.MONTH) +
                         ", Day: " + cal.get(Calendar.DAY_OF_MONTH));
 
@@ -89,18 +89,22 @@ public class LogController {
                     searchedLogs.add(log);
                 }
             }
+        } else {
+            // Validation of the year/month/date params failed, show generic error
+            return "errors/generic-error";
         }
         model.addAttribute("logs", searchedLogs);
         return "logs/logs";
     }
 
-
-/*
-    @GetMapping(value = "/search", params = {"year", "month"})
+    @PostMapping(value = "/search-year-month") //, params = {"year", "month", "day"}
     public String searchLogs(
-            @RequestParam(name = "year", required = false) int year,
-            @RequestParam(name = "month", required = false) int month,
+            @RequestParam(name = "year") int year,
+            @RequestParam(name = "month") int month,
             Model model) {
+
+        System.out.println("\n\nReceived year: " + year + ", received month: " + month + "\n\n");
+
         // Get current logged in user
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = userRepository.getUserByUsername(auth.getName());
@@ -124,19 +128,29 @@ public class LogController {
             for (Log log : allLogs) {
                 // Set the calendar instance to the current timestamp of each log
                 cal.setTimeInMillis(log.getTimestamp().getTime());
-                if (cal.get(Calendar.YEAR) == year && cal.get(Calendar.MONTH) == month) {
+
+                System.out.println("\n\nLooping through logs, currently have time of " +
+                        "Year: " + cal.get(Calendar.YEAR) + ", Month: " + cal.get(Calendar.MONTH));
+
+                if (cal.get(Calendar.YEAR) == year && cal.get(Calendar.MONTH) + 1 == month) {
                     searchedLogs.add(log);
                 }
             }
+        } else {
+            // Validation of the year/month/date params failed, show generic error
+            return "errors/generic-error";
         }
         model.addAttribute("logs", searchedLogs);
         return "logs/logs";
     }
 
-    @GetMapping(value = "/search", params = {"year"})
+    @PostMapping(value = "/search-year") //, params = {"year", "month", "day"}
     public String searchLogs(
-            @RequestParam(name = "year", required = false) int year,
+            @RequestParam(name = "year") int year,
             Model model) {
+
+        System.out.println("\n\nReceived year: " + year + ", received month: " + "\n\n");
+
         // Get current logged in user
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = userRepository.getUserByUsername(auth.getName());
@@ -159,15 +173,22 @@ public class LogController {
             for (Log log : allLogs) {
                 // Set the calendar instance to the current timestamp of each log
                 cal.setTimeInMillis(log.getTimestamp().getTime());
+
+                System.out.println("\n\nLooping through logs, currently have time of " +
+                        "Year: " + cal.get(Calendar.YEAR));
+
                 if (cal.get(Calendar.YEAR) == year) {
                     searchedLogs.add(log);
                 }
             }
+        } else {
+            // Validation of the year/month/date params failed, show generic error
+            return "errors/generic-error";
         }
         model.addAttribute("logs", searchedLogs);
         return "logs/logs";
     }
-*/
+
 
     private boolean validateYear(int year) {
         return year > 2000 && year < 3000;
