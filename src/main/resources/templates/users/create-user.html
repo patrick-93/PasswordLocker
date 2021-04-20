@@ -8,12 +8,12 @@
     <script src="/js/jquery-3.5.1.slim.min.js"></script>
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-    <title>Password Locker - Accounts</title>
+    <title>Password Locker - Users</title>
 </head>
 <body>
 <div class="container main-container">
     <div th:replace="fragments/navbar :: nav"></div>
-    <h1 class="h1-page-header">Create Account</h1>
+    <h1 class="h1-page-header">Create User</h1>
 
     <form th:action="@{/users/create}" th:object="${user}" action="#" method="post">
         <div class="form-group">
