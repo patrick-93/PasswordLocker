@@ -34,10 +34,14 @@ public class LogController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = userRepository.getUserByUsername(auth.getName());
 
+        /* Commenting out this block, regular users should have access to view the logs page
+           to see who changed an accounts password
         // Check if current user is a regular user, return unauthorized page if true
         if (currentUser.getRoles().equals("USER")) {
             return "errors/unauthorized-access";
         }
+        */
+
         // User has access so show logs
         model.addAttribute("logs", logRepository.findAllByOrderByTimestampDesc());
         return "logs/logs";
@@ -54,8 +58,11 @@ public class LogController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = userRepository.getUserByUsername(auth.getName());
 
+        /* Commenting out this block, regular users should have access to view the logs page
+           to see who changed an accounts password
         // Return an error if the currentUser isn't an ADMIN or AUDITOR
         if (currentUser.getRoles().equals("USER")) { return "errors/unauthorized-access"; }
+         */
 
         // Now Check if we have a valid year, month, and day
         boolean checkYear = validateYear(year);
@@ -99,8 +106,12 @@ public class LogController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = userRepository.getUserByUsername(auth.getName());
 
+        /* Commenting out this block, regular users should have access to view the logs page
+           to see who changed an accounts password
         // Return an error if the currentUser isn't an ADMIN or AUDITOR
         if (currentUser.getRoles().equals("USER")) { return "errors/unauthorized-access"; }
+         */
+
 
         // Now Check if we have a valid year, month, and day
         boolean checkYear = validateYear(year);
@@ -140,8 +151,11 @@ public class LogController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = userRepository.getUserByUsername(auth.getName());
 
+        /* Commenting out this block, regular users should have access to view the logs page
+           to see who changed an accounts password
         // Return an error if the currentUser isn't an ADMIN or AUDITOR
         if (currentUser.getRoles().equals("USER")) { return "errors/unauthorized-access"; }
+         */
 
         // Now Check if we have a valid year, month, and day
         boolean checkYear = validateYear(year);
