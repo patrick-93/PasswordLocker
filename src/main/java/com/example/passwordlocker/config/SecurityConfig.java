@@ -69,13 +69,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     }
                 })
                 // Leaving the failure handler in for debugging
-//                .failureHandler(new AuthenticationFailureHandler() {
-//                    @Override
-//                    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-//                        System.out.println("\n\nEntered failure handler\n\n");
-//                        exception.printStackTrace();
-//                    }
-//                })
+                .failureHandler(new AuthenticationFailureHandler() {
+                    @Override
+                    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+                        System.out.println("\n\nEntered failure handler\n\n");
+                        exception.printStackTrace();
+                    }
+                })
                 .permitAll()
                 .and()
                 .logout()
