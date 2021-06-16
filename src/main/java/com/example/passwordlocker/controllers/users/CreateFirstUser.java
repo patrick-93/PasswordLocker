@@ -26,11 +26,23 @@ public class CreateFirstUser {
 
     @GetMapping(value="/create-first-user")
     private String createFirstUser(Model model) {
+        /* Commenting out, if a get request hit's this URL I want to automatically create
+           an admin user
         boolean check = checkIfAdminExists();
         if (!check) {
             model.addAttribute("user", new User());
             return "create-first-user";
         }
+        */
+        User user = new User();
+        user.setUsername("admin");
+        user.setPassword(passwordEncoder.encode("SuperSecureP@ssword"));
+        user.setRoles("ADMIN");
+        userRepository.save(user);
+        logRepository.save(
+                new Log("Admin user was created")
+        );
+
         return "redirect:/";
     }
 

@@ -33,6 +33,10 @@ public class UpdateUser {
         // find the user with the id param
         User user = userRepository.findById(id).orElse(new User());
 
+        if (user.getUsername().equals("admin")) {
+            return "redirect:/";
+        }
+
         // Check if we found a real user
         if (user.getUsername() == null) {
             return "errors/user-error";
